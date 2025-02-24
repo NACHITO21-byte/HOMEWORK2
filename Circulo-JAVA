@@ -1,1 +1,48 @@
+import javax.swing.*;
+import java.awt.*;
 
+public class Circulo {
+    private Punto centro;
+    private float radio;
+
+    public Circulo(Punto centro, float radio) {
+        this.centro = centro;
+        this.radio = radio;
+    }
+
+    public void dibujaCirculo() {
+        JFrame frame = new JFrame("Dibujando un Círculo");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(500, 500);
+
+        // Dibujar directamente con un JPanel anónimo
+        frame.add(new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.setColor(Color.BLUE);
+                
+                // Ajustar para centrar el círculo correctamente
+                int x = (int) (centro.getX() - radio);
+                int y = (int) (centro.getY() - radio);
+                int diametro = (int) (2 * radio);
+                
+                g.drawOval(x, y, diametro, diametro);
+            }
+        });
+
+        frame.setVisible(true);
+    }
+
+    @Override
+    public String toString() {
+        return "Círculo: Centro=" + centro + ", Radio=" + radio;
+    }
+
+    public static void main(String[] args) {
+        Punto centro = new Punto(250, 250);
+        Circulo circulo = new Circulo(centro, 100);
+        System.out.println(circulo);
+        circulo.dibujaCirculo();
+    }
+}

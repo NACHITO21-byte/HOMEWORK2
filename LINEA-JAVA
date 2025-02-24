@@ -1,1 +1,45 @@
-xdd
+// Linea.java
+import javax.swing.*;
+import java.awt.*;
+
+public class Linea {
+    private Punto p1;
+    private Punto p2;
+
+    public Linea(Punto p1, Punto p2) {
+        this.p1 = p1;
+        this.p2 = p2;
+    }
+
+    public void dibujaLinea() {
+        JFrame frame = new JFrame("Dibujando una Línea");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(500, 500);
+        
+        // Dibujar directamente con un JPanel anónimo
+        frame.add(new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.setColor(Color.RED);
+                g.drawLine(p1.getX(), p1.getY(), p2.getX(), p2.getY());
+            }
+        });
+
+        frame.setVisible(true);
+    }
+
+    @Override
+    public String toString() {
+        return "Línea: " + p1 + " -> " + p2;
+    }
+
+    public static void main(String[] args) {
+        Punto p1 = new Punto(50, 50);
+        Punto p2 = new Punto(400, 300);
+        Linea linea = new Linea(p1, p2);
+        System.out.println(linea);
+        linea.dibujaLinea();
+    }
+}
+
